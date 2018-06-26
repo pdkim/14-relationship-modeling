@@ -1,8 +1,8 @@
 ##Travis:
-
+[![Build Status](https://travis-ci.com/pdkim/14-relationship-modeling.svg?branch=pk14)](https://travis-ci.com/pdkim/14-relationship-modeling)
 
 ##Heroku:
-
+https://pk14-relationship-modeling.herokuapp.com/
 
 ##Github: 
 https://github.com/pdkim/14-relationship-modeling
