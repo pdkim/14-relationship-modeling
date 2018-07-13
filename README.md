@@ -1,49 +1,43 @@
-![CF](https://camo.githubusercontent.com/70edab54bba80edb7493cad3135e9606781cbb6b/687474703a2f2f692e696d6775722e636f6d2f377635415363382e706e67) 14: Mongo/Express 2 Resource API
-===
+##Travis:
+[![Build Status](https://travis-ci.com/pdkim/14-relationship-modeling.svg?branch=pk14)](https://travis-ci.com/pdkim/14-relationship-modeling)
+
+##Heroku:
+https://pk14-relationship-modeling.herokuapp.com/
+
+##Github: 
+https://github.com/pdkim/14-relationship-modeling
 
 
-## Submission Instructions
-* Work in a fork of this repository
-* Work in a branch on your fork
-* Create a PR to your master from your working branch.
-* Ensure that your repository/branch is connected to travis-ci.com
-* Ensure that your repository/branch is connected to a dyno at heroku.com
-* Heroku and Travis should pick you up and deploy
-* Submit on canvas:
-  * a question and observation
-  * how long you spent
-  * link to your pull request
-  * link to your build at travis-ci URL
-  * Heroku Server URL
+##Feature:
+Using the same application for lab 13, this should be able to find data that is connected to another set of data.  This app should use the popukate method during its functionality.
 
-## Configuration 
-Configure the root of your repository with the following files and directories. Thoughfully name and organize any aditional configuration or module files.
-* **README.md** - contains documentation
-* **.env** - contains env variables (should be git ignored)
-* **.gitignore** - contains a [robust](http://gitignore.io) `.gitignore` file 
-* **.eslintrc** - contains the course linter configuratoin
-* **.eslintignore** - contains the course linter ignore configuration
-* **.travis.yml** - contains the course linter ignore configuration
-* **package.json** - contains npm package config
-  * create a `lint` script for running eslint (eslint **/*.js)
-  * create a `test` script for running tests
-  * create a `start` script for running your server
-* **index.js** - the entry point for your application
-* **src/** - contains your core application files and folders
-* **src/app.js** - (or main.js) contains your core application bootstrap
-* **src/lib/** - contains module definitions
-* **\_\_test\_\_/** - contains unit tests
-
-## Learning Objectives  
-* students will be able to create a 2 resource MongoDB and Express API
-* students will be able to reference additional resources as part of their mongoose.js based data models
-* students will be able to use the `populate` method to allow for resource query population
-
-## Requirements
-
-#### Feature Tasks
-  * continue working on the `express` and `mongoDB` REST API that you started yesterday
-  * include an additional resource that contains a "relationship" to the single resource that has already been created
-  * create `GET`, `POST`, `PUT`, and `DELETE` routes for your newly added resource
-  * test your application to ensure that it meets the standard criteria of a working **full CRUD** REST API
-  * use `populate` in the `get()` route logic your  `/api/new-resource-name/:id` route to populate the associated property used to house related resources **(ex: `List.findById(req.params.id).populate('notes')`)**
+###Intructions:
+1. Go to the github link and clone the repository. You may want to fork prior to cloning the repository.
+'npm install' before running anything.
+2. If you haven't already, install mongo. Once installed or already installed, run mongod to get mongo up and running.
+3. Create a .env file with the following content: 
+  PORT=3000 
+  MONGODB_URI="mongodb://localhost/lab-14"
+4. In another terminal, 'nodemon index.js' to start server.
+5. In postman, have a tab for POST, GET, and PUT at the following url: http://localhost:3000/api/v1/workers
+6. Go to POST tab and select Body > Raw. Copy the following information (you can change values on the right as you like): 
+  {
+    "firstName" : "Phil", 
+    "lastName" : "Kim", 
+    "hourlyWage" : "100" 
+    }
+  Press POST. You should now recieve a valid object (workers).
+7. Open a new POST tab at the url, http://localhost:3000/api/v1/company, and select Body > Raw. Copy the following information (name can be anything but the id should be the id created from the worker object above):
+  {
+	 "name":"Microsoft",
+	 "employee":"worker_id"
+  }
+  Press POST and a new company object should be created.
+8. Open 2 new GET tabs with the following URLs (change ids to the id generated in the POST tabs):
+  - http://localhost:3000/api/v1/workers/id
+  - http://localhost:3000/api/v1/company/id
+  Press GET and you should retrieve the newly generated objects.  Company should have populated the worker information.
+9. Open 2 new PUT tabs at the same URLs as step 8 and update the body information.  Ensure they follow the same format as step 6 and 7.
+10. Press PUT on both and go back to GET tabs and GET.  You should now have the objects with updated data.
+11. Open 2 new DELETE tabs using the URLs in step 8.  Press DELETE on both or worker first, then company.
+12. Go back to GET tabs and GET.  Both objects should no longer exist. 
