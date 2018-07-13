@@ -15,6 +15,7 @@ let sendJSON = (res, data) => {
 router.get('/api/v1/:model/:id', (req, res, next) => {
   req.model.findById(req.params.id)
     .populate('employee')
+    .exec()
     .then(data => {
       if (data === null) {
         res.status(404).send('Not Found');
@@ -30,6 +31,7 @@ router.get('/api/v1/:model/:id', (req, res, next) => {
 router.get('/api/v1/:model', (req, res) => {
   req.model.find({})
     .populate('employee')
+    .exec()
     .then(data => sendJSON(res, data, next))
     .catch(next);
 });
