@@ -28,11 +28,11 @@ router.get('/api/v1/:model/:id', (req, res, next) => {
 });
 
 //GET ALL
-router.get('/api/v1/:model', (req, res) => {
+router.get('/api/v1/:model', (req, res, next) => {
   req.model.find({})
     .populate('employee')
     .exec()
-    .then(data => sendJSON(res, data, next))
+    .then(data => sendJSON(res, data))
     .catch(next);
 });
 
